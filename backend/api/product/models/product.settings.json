@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "name": "product",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "unique": true
+    },
+    "featured": {
+      "type": "boolean",
+      "unique": false
+    },
+    "category": {
+      "via": "products",
+      "model": "category"
+    },
+    "variants": {
+      "via": "product",
+      "collection": "variant"
+    }
+  }
+}
