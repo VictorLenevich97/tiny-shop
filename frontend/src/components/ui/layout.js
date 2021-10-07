@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "./header";
+import { Footer } from "./footer";
 import { useStaticQuery, graphql } from "gatsby";
 
 export const Layout = ({ children }) => {
@@ -19,8 +20,17 @@ export const Layout = ({ children }) => {
   return (
     <>
       <Header categories={data.allStrapiCategory.edges} />
-      <main>{children}</main>
-      <footer></footer>
+      <div style={{ marginBottom: "10rem" }} />
+      <div
+        style={{
+          margin: `0 auto`,
+          maxWidth: 960,
+          padding: `0 1.0875rem 1.45 rem`,
+        }}
+      >
+        <main>{children}</main>
+      </div>
+      <Footer />
     </>
   );
 };
