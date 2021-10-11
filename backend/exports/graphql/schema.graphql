@@ -160,6 +160,7 @@ type Product {
   description: String!
   featured: Boolean
   category: Category
+  promo: Boolean
   variants(sort: String, limit: Int, start: Int, where: JSON): [Variant]
 }
 
@@ -183,6 +184,7 @@ type ProductGroupBy {
   description: [ProductConnectionDescription]
   featured: [ProductConnectionFeatured]
   category: [ProductConnectionCategory]
+  promo: [ProductConnectionPromo]
 }
 
 type ProductConnectionId {
@@ -225,12 +227,18 @@ type ProductConnectionCategory {
   connection: ProductConnection
 }
 
+type ProductConnectionPromo {
+  key: Boolean
+  connection: ProductConnection
+}
+
 input ProductInput {
   name: String!
   description: String!
   featured: Boolean
   category: ID
   variants: [ID]
+  promo: Boolean
   created_by: ID
   updated_by: ID
 }
@@ -241,6 +249,7 @@ input editProductInput {
   featured: Boolean
   category: ID
   variants: [ID]
+  promo: Boolean
   created_by: ID
   updated_by: ID
 }
@@ -954,7 +963,7 @@ input editComponentCustomCustomFieldInput {
   options: String
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnection_id | CategoryConnectionCreatedAt | CategoryConnectionUpdatedAt | CategoryConnectionName | CategoryConnectionDescription | CategoryConnectionFilterOptions | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Product | ProductConnection | ProductAggregator | ProductGroupBy | ProductConnectionId | ProductConnection_id | ProductConnectionCreatedAt | ProductConnectionUpdatedAt | ProductConnectionName | ProductConnectionDescription | ProductConnectionFeatured | ProductConnectionCategory | createProductPayload | updateProductPayload | deleteProductPayload | Variant | VariantConnection | VariantAggregator | VariantAggregatorSum | VariantAggregatorAvg | VariantAggregatorMin | VariantAggregatorMax | VariantGroupBy | VariantConnectionId | VariantConnection_id | VariantConnectionCreatedAt | VariantConnectionUpdatedAt | VariantConnectionSize | VariantConnectionColor | VariantConnectionQty | VariantConnectionPrice | VariantConnectionStyle | VariantConnectionProduct | VariantConnectionPublished_at | createVariantPayload | updateVariantPayload | deleteVariantPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentCustomCustomField
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnection_id | CategoryConnectionCreatedAt | CategoryConnectionUpdatedAt | CategoryConnectionName | CategoryConnectionDescription | CategoryConnectionFilterOptions | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Product | ProductConnection | ProductAggregator | ProductGroupBy | ProductConnectionId | ProductConnection_id | ProductConnectionCreatedAt | ProductConnectionUpdatedAt | ProductConnectionName | ProductConnectionDescription | ProductConnectionFeatured | ProductConnectionCategory | ProductConnectionPromo | createProductPayload | updateProductPayload | deleteProductPayload | Variant | VariantConnection | VariantAggregator | VariantAggregatorSum | VariantAggregatorAvg | VariantAggregatorMin | VariantAggregatorMax | VariantGroupBy | VariantConnectionId | VariantConnection_id | VariantConnectionCreatedAt | VariantConnectionUpdatedAt | VariantConnectionSize | VariantConnectionColor | VariantConnectionQty | VariantConnectionPrice | VariantConnectionStyle | VariantConnectionProduct | VariantConnectionPublished_at | createVariantPayload | updateVariantPayload | deleteVariantPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentCustomCustomField
 
 input InputID {
   id: ID!
