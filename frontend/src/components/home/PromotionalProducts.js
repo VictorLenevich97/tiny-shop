@@ -5,6 +5,7 @@ import {
   IconButton,
   Button,
   makeStyles,
+  useMediaQuery,
 } from "@material-ui/core";
 import { useStaticQuery, graphql } from "gatsby";
 import Carousel from "react-spring-3d-carousel";
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "70rem",
     padding: "30rem 10rem 10rem 10rem",
+
+    [theme.breakpoints.down("lg")]: {
+      padding: "20rem 2rem 2rem 2rem",
+    },
   },
   productName: {
     color: "#fff",
@@ -37,13 +42,27 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     borderRadius: 20,
     boxShadow: theme.shadows[5],
+    [theme.breakpoints.down("md")]: {
+      height: "25rem",
+      width: "20rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "20rem",
+      width: "15rem",
+    },
   },
   carouselContainer: {
     marginLeft: "20rem",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: 0,
+      height: "30rem",
+    },
   },
   space: {
-    margin: "0 15rem ",
-    marginBottom: "5rem",
+    margin: "0 15rem 10rem 15rem ",
+    [theme.breakpoints.down("sm")]: {
+      margin: "0 10rem 10rem 10rem ",
+    },
   },
   explore: {
     textTransform: "none",
@@ -51,10 +70,14 @@ const useStyles = makeStyles((theme) => ({
   },
   descriptionContainer: {
     textAlign: "right",
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center",
+    },
   },
 }));
 
 export const PromotionalProducts = () => {
+  const mathcesMD = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const classes = useStyles();
   const [selectedSlide, setSelectedSlide] = useState(0);
 
@@ -110,7 +133,7 @@ export const PromotionalProducts = () => {
                   variant="h1"
                   classes={{ root: classes.productName }}
                 >
-                  {name}
+                  {name.split(" ")[0]}
                 </Typography>
               ) : null}
             </Grid>
@@ -120,14 +143,13 @@ export const PromotionalProducts = () => {
       })
   );
 
-  console.log(data);
-
   return (
     <Grid
       container
-      justify="space-between"
+      justify={mathcesMD ? "space-arround" : "space-between"}
       alignItems="center"
       classes={{ root: classes.mainContainer }}
+      direction={mathcesMD ? "column" : "row"}
     >
       <Grid item classes={{ root: classes.carouselContainer }}>
         <Carousel slides={slides} goToSlide={selectedSlide} />

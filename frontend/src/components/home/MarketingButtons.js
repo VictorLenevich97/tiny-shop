@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, makeStyles, IconButton } from "@material-ui/core";
+import { Grid, Typography, makeStyles } from "@material-ui/core";
 import { Link } from "gatsby";
 
 import marketingAdornment from "../../images/marketing-adornment.svg";
@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     height: "50rem",
     width: "50rem",
     transition: "transform 0.5s easy",
-
     "&:hover": {
       transform: "scale(1.1)",
     },
@@ -40,7 +39,7 @@ export const MarketingButtons = ({}) => {
       classes={{ root: classes.container }}
     >
       {buttons.map((button) => (
-        <Grid item>
+        <Grid item key={button.label}>
           <Grid
             classes={{ root: classes.button }}
             container
